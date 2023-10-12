@@ -17,10 +17,10 @@ export default function App() {
                 <Text className="text-red-400 text-2xl text-center">
                     An Error Occured
                 </Text>
-                <Text className="text-red-400 text-2xl text-center">
+                <Text className="text-red-400 text-xl text-center">
                     Message: {error.message}
                 </Text>
-                <Text className="text-red-400 text-2xl text-center">
+                <Text className="text-red-400 text-xl text-center">
                     Code: {error.code}
                 </Text>
             </View>
@@ -30,7 +30,9 @@ export default function App() {
     if (isLoading) {
         return (
             <View className="flex-1 gap-10 items-center justify-center bg-white">
-                <Text>Loading</Text>
+                <Text className="text-black font-bold text-2xl text-center">
+                    Loading...
+                </Text>
             </View>
         );
     }
