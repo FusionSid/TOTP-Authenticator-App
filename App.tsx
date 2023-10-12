@@ -1,43 +1,56 @@
 import { useState, useCallback, useEffect } from "react";
 import { Pressable, Text, View, Linking, Alert } from "react-native";
+import * as SQLite from "expo-sqlite";
+import useAccounts from "./core/db/useAccounts";
+import AccountsList from "./core/components/accounts";
 
 export default function App() {
-    const handlePress = useCallback(async () => {
-        const url = "https://youtube.com/watch?v=dQw4w9WgXcQ";
-        const supported = await Linking.canOpenURL(url);
+    const databaseConnection = SQLite.openDatabase("data.db");
 
-        if (supported) {
-            await Linking.openURL(url);
-        } else {
-            Alert.alert(`Don't know how to open this URL: ${url}`);
-        }
-    }, []);
+    const { isLoading, accounts, error } = useAccounts({
+        databaseConnection: databaseConnection,
+    });
 
-    const [count, setCount] = useState(0);
+    if (error !== null) {
+        return (
+            <View className="flex-1 gap-10 items-center justify-center bg-white">
+                <Text className="text-red-400 text-2xl text-center">
+                    An Error Occured
+                </Text>
+                <Text className="text-red-400 text-2xl text-center">
+                    Message: {error.message}
+                </Text>
+                <Text className="text-red-400 text-2xl text-center">
+                    Code: {error.code}
+                </Text>
+            </View>
+        );
+    }
 
-    useEffect(() => {
-        if (count === 69) {
-            handlePress();
-        }
-    }, [count]);
+    if (isLoading) {
+        return (
+            <View className="flex-1 gap-10 items-center justify-center bg-white">
+                <Text>Loading</Text>
+            </View>
+        );
+    }
 
     return (
-        <View className="flex-1 gap-10 items-center justify-center bg-white">
-            <View>
-                <Text className="text-red-400 text-2xl text-center">
-                    Hello World!
-                </Text>
-                <Text className="text-blue-400 text-xl text-center">
-                    Current Count: {count}
-                </Text>
+        <View className="bg-white">
+            <View className="flex items-center justify-between">
+                <Text>All Accounts</Text>
+                {/* Button to create new */}
             </View>
-            <View>
-                <Pressable onPress={() => setCount((count) => count + 1)}>
-                    <Text className="bg-blue-500 text-white font-bold py-4 px-5">
-                        Current Count: {count}
-                    </Text>
-                </Pressable>
-            </View>
+            <AccountsList accounts={accounts} />
         </View>
     );
 }
+
+// Open app
+// Check db table exists if not create
+// get list of accounts
+// display list of accounts on page with top right having create button
+// each account has the name, current code and a timer next to it
+// when timer reaches zero it will reset setInterval?
+// clicking account allows you to edit name or delete
+// create custom hook that runs use effect and returns accounts
