@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import {
+    View,
+    Text,
+    ScrollView,
+    SafeAreaView,
+    TouchableOpacity,
+} from "react-native";
 
 import useClock from "../helpers/useClock";
 import { Accounts } from "../helpers/types";
@@ -16,7 +22,11 @@ const AccountItem = ({
     return (
         <View className="flex-row justify-between w-full p-5 bg-blue-500">
             <Text className="text-white text-xl">{account.name}</Text>
-            <Text className="text-white text-xl">{account.code}</Text>
+            <TouchableOpacity>
+                <Text selectable={true} className="text-white text-xl">
+                    {account.code}
+                </Text>
+            </TouchableOpacity>
             <Text className="text-white text-xl">{timeLeft}</Text>
         </View>
     );
