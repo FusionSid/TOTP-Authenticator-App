@@ -1,4 +1,4 @@
-import { authenticator } from "otplib";
+import totp from "totp-generator";
 import { Accounts } from "../helpers/types";
 import { useState, useEffect } from "react";
 import { AccountsWithCode } from "../helpers/types";
@@ -15,17 +15,37 @@ function useAccountsCode({ accounts }: { accounts: Accounts }): {
     useEffect(() => {
         setAccountsWithCode(
             accounts.map((account) => {
-                return { ...account, code: 123 };
+                return {
+                    ...account,
+                    code: totp(account.secret),
+                };
             })
         );
 
-        const updateOTPInteval = setInterval(() => {
+        const loopUpdateCode = () => {
             setAccountsWithCode(
                 accounts.map((account) => {
-                    return { ...account, code: Math.random() * 10 };
+                    return {
+                        ...account,
+                        code: totp(account.secret),
+                    };
                 })
             );
-        }, 5000);
+        };
+
+        // run function once
+        loopUpdateCode();
+
+        // calculate how long current code is valid
+        const msTillNextCode =
+            (30 - (Math.round(Number(new Date()) / 1000) % 30)) * 1000;
+
+        let updateOTPInteval: NodeJS.Timeout;
+
+        // after current code is invalid create a loop that updates every 30 sec
+        setTimeout(() => {
+            updateOTPInteval = setInterval(loopUpdateCode, 30_000);
+        }, msTillNextCode);
 
         return () => {
             clearInterval(updateOTPInteval);
