@@ -6,6 +6,6 @@ export type Account = {
 
 export type Accounts = Account[];
 
-export type AccountWithCode = Account & { code: number };
+export type AccountWithCode = Account & { code: string };
 
 export type AccountsWithCode = AccountWithCode[];
