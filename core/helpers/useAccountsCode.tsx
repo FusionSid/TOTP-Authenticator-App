@@ -1,6 +1,7 @@
 import totp from "totp-generator";
-import { Accounts } from "../helpers/types";
 import { useState, useEffect } from "react";
+
+import { Accounts } from "../helpers/types";
 import { AccountsWithCode } from "../helpers/types";
 
 function useAccountsCode({ accounts }: { accounts: Accounts }): {

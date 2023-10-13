@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
 import * as SQLite from "expo-sqlite";
+import { useState, useEffect } from "react";
+
 import { Accounts } from "../helpers/types";
 
 const CREATE_TABLE_QUERY =

@@ -1,8 +1,9 @@
 import React from "react";
+import { View, Text, ScrollView, SafeAreaView } from "react-native";
+
 import { Accounts } from "../helpers/types";
 import { AccountWithCode } from "../helpers/types";
 import useAccountsCode from "../helpers/useAccountsCode";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
 
 const AccountItem = ({ account }: { account: AccountWithCode }) => {
     return (

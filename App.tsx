@@ -1,6 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
-import { Pressable, Text, View, Linking, Alert } from "react-native";
 import * as SQLite from "expo-sqlite";
+import { Text, View } from "react-native";
+
 import useAccounts from "./core/db/useAccounts";
 import AccountsList from "./core/components/accounts";
 
@@ -47,12 +47,3 @@ export default function App() {
         </View>
     );
 }
-
-// Open app
-// Check db table exists if not create
-// get list of accounts
-// display list of accounts on page with top right having create button
-// each account has the name, current code and a timer next to it
-// when timer reaches zero it will reset setInterval?
-// clicking account allows you to edit name or delete
-// create custom hook that runs use effect and returns accounts
