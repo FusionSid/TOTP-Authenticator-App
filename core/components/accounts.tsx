@@ -15,7 +15,7 @@ const AccountItem = ({ account }: { account: AccountWithCode }) => {
 };
 
 const AccountsList = ({ accounts }: { accounts: Accounts }) => {
-    const { accountsWithCode, error } = useAccountsCode({
+    const { accountsWithCode } = useAccountsCode({
         accounts,
     });
 

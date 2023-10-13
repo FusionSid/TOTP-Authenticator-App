@@ -6,12 +6,10 @@ import { AccountsWithCode } from "../helpers/types";
 
 function useAccountsCode({ accounts }: { accounts: Accounts }): {
     accountsWithCode: AccountsWithCode;
-    error: string | null;
 } {
     const [accountsWithCode, setAccountsWithCode] = useState<AccountsWithCode>(
         []
     );
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         setAccountsWithCode(
@@ -53,7 +51,7 @@ function useAccountsCode({ accounts }: { accounts: Accounts }): {
         };
     }, []);
 
-    return { accountsWithCode, error };
+    return { accountsWithCode };
 }
 
 export default useAccountsCode;
