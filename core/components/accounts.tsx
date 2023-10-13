@@ -8,7 +8,6 @@ const AccountItem = ({ account }: { account: AccountWithCode }) => {
     return (
         <View>
             <Text>{account.name}</Text>
-            <Text>{account.secret}</Text>
             <Text>{account.code}</Text>
         </View>
     );
