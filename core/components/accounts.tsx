@@ -20,7 +20,7 @@ const AccountItem = ({
     timeLeft: number;
 }) => {
     return (
-        <View className="flex-row justify-between w-full p-5 bg-blue-500">
+        <View className="flex-row justify-between w-full p-5 bg-gray-500 my-2 rounded-md">
             <Text className="text-white text-xl">{account.name}</Text>
             <TouchableOpacity>
                 <Text selectable={true} className="text-white text-xl">
