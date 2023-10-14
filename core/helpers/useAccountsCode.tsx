@@ -25,6 +25,17 @@ function useAccountsCode({ accounts }: { accounts: Accounts }): {
         }
     }, [timeLeft]);
 
+    useEffect(() => {
+        setAccountsWithCode(
+            accounts.map((account) => {
+                return {
+                    ...account,
+                    code: totp(account.secret),
+                };
+            })
+        );
+    }, [accounts]);
+
     return { accountsWithCode };
 }
 
